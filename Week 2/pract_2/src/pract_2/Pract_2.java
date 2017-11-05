@@ -21,6 +21,7 @@ public class Pract_2 {
              case 2:System.out.println("Valid and more than/ equal to 5");break;
              default: System.out.println("Invalid");break;
          }
+         System.out.println("Program using loops & control statements");
     }
     
 }
