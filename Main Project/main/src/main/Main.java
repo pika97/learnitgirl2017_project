@@ -14,7 +14,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import java.io.File;
 import javafx.*;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import 	javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,16 +23,14 @@ import javafx.scene.media.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  *
  * @author swatiii
  */
 public class Main extends Application {
+    private Stage stage;
     MediaPlayer mediaPlayer;
-    private Label time;
-    Duration duration;
     Scene scene;
     Media media;
     double width;
@@ -135,12 +132,10 @@ public class Main extends Application {
 
         findButton.setOnAction((ActionEvent e) -> {
             FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new ExtensionFilter("*.mp3"));
-            File file = fc.showOpenDialog(null);
+            File file = fc.showOpenDialog(stage);
             String path = file.getAbsolutePath();
             path = path.replace("\\", "/");
             media = new Media(new File(path).toURI().toString());
-           
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setAutoPlay(true);
             mediaView.setMediaPlayer(mediaPlayer);
