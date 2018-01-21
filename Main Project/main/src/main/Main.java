@@ -42,15 +42,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
             scene = setScene(this.width, this.height);
-            primaryStage.setTitle("Media Player!");
+            primaryStage.setTitle("Music Player");
             primaryStage.setScene(scene);
             primaryStage.show();
     }
     public Scene setScene(double width, double height) {
     this.height = height;
     this.width = width;
-    //Add your own path of the vidio that you want to play
-    String path = "F:/MediaPl/src/mediapl/Tom and Jerry Beach YouTube.mp4";
 
     media = new Media(new File("/home/swatiii/Downloads/Enrique_Iglesias_Hero.mp3").toURI().toString());
     mediaPlayer = new MediaPlayer(media);
@@ -61,10 +59,9 @@ public class Main extends Application {
     BorderPane borderPane = new BorderPane();
     borderPane.setCenter(mediaView);
     borderPane.setBottom(addToolBar());
-
-    borderPane.setStyle("-fx-background-color: Blue");
-    scene = new Scene(borderPane, 900, 900);
-    scene.setFill(Color.AQUA);
+    borderPane.setStyle(" -fx-background-image: url(\"/resources/images/wall2.jpg\");-fx-background-repeat: stretch; ");
+    
+    scene = new Scene(borderPane, 400, 500);
     return scene;
 }
  private HBox addToolBar() {
@@ -76,8 +73,11 @@ public class Main extends Application {
         toolBar.setStyle("-fx-background-color: pink");
         Image playButtonImage = new Image(getClass().getResourceAsStream("/resources/images/play.png"));
         Button playButton = new Button();
-        playButton.setGraphic(new ImageView(playButtonImage));
-        playButton.setStyle("-fx-background-color: Black");
+        ImageView play = new ImageView(playButtonImage);
+        playButton.setGraphic(play);
+        play.setFitHeight(60);
+        play.setFitWidth(60);
+        playButton.setStyle("-fx-background-color: Black;-fx-width:5%;-fx-height:10%;");
 
         playButton.setOnAction((ActionEvent e) -> {
             mediaPlayer.play();
@@ -91,7 +91,10 @@ public class Main extends Application {
 });
         Image pausedButtonImage = new Image(getClass().getResourceAsStream("/resources/images/pause.png"));
         Button pauseButton = new Button();
-        pauseButton.setGraphic(new ImageView(pausedButtonImage));
+        ImageView pause = new ImageView(pausedButtonImage);
+        pauseButton.setGraphic(pause);
+        pause.setFitHeight(60);
+        pause.setFitWidth(60);
         pauseButton.setStyle("-fx-background-color: Black");
 
         pauseButton.setOnAction((ActionEvent e) -> {
@@ -99,52 +102,59 @@ public class Main extends Application {
         });
         pauseButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
         pauseButton.setStyle("-fx-background-color: Black");
-        pauseButton.setStyle("-fx-height:4vh");
+        pauseButton.setStyle("-fx-body-color: Black");
         });
         pauseButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
         pauseButton.setStyle("-fx-background-color: Black");
         });
-        Image nextButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
-        Button nextButton = new Button();
-        nextButton.setGraphic(new ImageView(nextButtonImage));
-        nextButton.setStyle("-fx-background-color: Black");
+        Image reloadButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
+        Button reloadButton = new Button();
+        ImageView reload = new ImageView(reloadButtonImage);
+        reloadButton.setGraphic(reload);
+        reload.setFitHeight(60);
+        reload.setFitWidth(60);
+        reloadButton.setStyle("-fx-background-color: Black");
 
-        nextButton.setOnAction((ActionEvent e) -> {
+        reloadButton.setOnAction((ActionEvent e) -> {
             mediaPlayer.seek(mediaPlayer.getStartTime());
         });
-        nextButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-        nextButton.setStyle("-fx-background-color: Black");
-        nextButton.setStyle("-fx-body-color: Black");
+        reloadButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+        reloadButton.setStyle("-fx-background-color: Black");
+        reloadButton.setStyle("-fx-body-color: Black");
         });
-        nextButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-        nextButton.setStyle("-fx-background-color: Black");
+        reloadButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+        reloadButton.setStyle("-fx-background-color: Black");
         });
-        Image stopButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
-        Button stopButton = new Button();
-        stopButton.setGraphic(new ImageView(stopButtonImage));
-        stopButton.setStyle("-fx-background-color: Black");
+        Image findButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
+        Button findButton = new Button();
+        ImageView find = new ImageView(findButtonImage);
+        findButton.setGraphic(find);
+        find.setFitHeight(60);
+        find.setFitWidth(60);
+        findButton.setStyle("-fx-background-color: Black");
 
-        stopButton.setOnAction((ActionEvent e) -> {
+        findButton.setOnAction((ActionEvent e) -> {
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().add(new ExtensionFilter("*.mp3"));
             File file = fc.showOpenDialog(null);
             String path = file.getAbsolutePath();
             path = path.replace("\\", "/");
             media = new Media(new File(path).toURI().toString());
-            mediaPlayer.stop();
+           
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setAutoPlay(true);
             mediaView.setMediaPlayer(mediaPlayer);
 
         });
-        stopButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
-        stopButton.setStyle("-fx-background-color: Black");
-        stopButton.setStyle("-fx-body-color: Black");
+        findButton.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+        findButton.setStyle("-fx-background-color: Black");
+        findButton.setStyle("-fx-body-color: Black");
         });
-        stopButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
-        stopButton.setStyle("-fx-background-color: Black");
+        findButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
+        findButton.setStyle("-fx-background-color: Black");
         });
-        toolBar.getChildren().addAll(playButton, pauseButton,nextButton,stopButton);
+        
+        toolBar.getChildren().addAll(playButton, pauseButton,reloadButton,findButton);
         return toolBar;
 }
     /**
