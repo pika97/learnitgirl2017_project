@@ -59,7 +59,7 @@ public class Main extends Application {
     BorderPane borderPane = new BorderPane();
     borderPane.setCenter(mediaView);
     borderPane.setBottom(addToolBar());
-    borderPane.setStyle(" -fx-background-image: url(\"/resources/images/wall2.jpg\");-fx-background-repeat: stretch; ");
+    borderPane.setStyle(" -fx-background-image: url(\"/resources/images/wall.jpg\");-fx-background-repeat: stretch;-fx-background-size:cover; ");
     
     scene = new Scene(borderPane, 400, 500);
     return scene;
@@ -70,14 +70,14 @@ public class Main extends Application {
         toolBar.setAlignment(Pos.CENTER);
         toolBar.alignmentProperty().isBound();
         toolBar.setSpacing(5);
-        toolBar.setStyle("-fx-background-color: pink");
+        toolBar.setStyle("-fx-background-color:Black");
         Image playButtonImage = new Image(getClass().getResourceAsStream("/resources/images/play.png"));
         Button playButton = new Button();
         ImageView play = new ImageView(playButtonImage);
         playButton.setGraphic(play);
         play.setFitHeight(60);
         play.setFitWidth(60);
-        playButton.setStyle("-fx-background-color: Black;-fx-width:5%;-fx-height:10%;");
+        playButton.setStyle("-fx-background-color: Black");
 
         playButton.setOnAction((ActionEvent e) -> {
             mediaPlayer.play();
@@ -107,7 +107,7 @@ public class Main extends Application {
         pauseButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
         pauseButton.setStyle("-fx-background-color: Black");
         });
-        Image reloadButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
+        Image reloadButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/reload.png"));
         Button reloadButton = new Button();
         ImageView reload = new ImageView(reloadButtonImage);
         reloadButton.setGraphic(reload);
@@ -125,7 +125,7 @@ public class Main extends Application {
         reloadButton.addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent e) -> {
         reloadButton.setStyle("-fx-background-color: Black");
         });
-        Image findButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/play.png"));
+        Image findButtonImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/images/find.png"));
         Button findButton = new Button();
         ImageView find = new ImageView(findButtonImage);
         findButton.setGraphic(find);
